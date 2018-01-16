@@ -1,0 +1,25 @@
+#	Makefile template for C++ compiler "g++"
+#	Macros to change for each new makefile:
+#		OBJS = list of all the ".o" files to be made from ".cc" files
+#		HDRS = list of all the ".h" files
+#		EXEC = name of executable file
+#
+CC	=	g++
+# CFLAGS	=	-g
+CFLAGS	=	-g -DDEBUG=1
+# LFLAGS	= -R /usr/sfw/lib
+OBJS	=	main.o
+HDRS	=	box.h queue.h
+EXEC	=	main
+
+.SUFFIXES: .cc
+.cc.o:
+	$(CC) -c $(CFLAGS) $*.cc
+
+$(EXEC): $(OBJS)
+	$(CC)  $(CFLAGS) -o $(EXEC) $(OBJS) $(LFLAGS)
+
+$(OBJS): $(HDRS)
+
+clean:
+	rm -f $(OBJS) $(EXEC)
